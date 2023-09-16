@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="MyToDo.Views.UserCenterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:MyToDo.Views"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:pass="clr-namespace:MyToDo.Extensions"
+             mc:Ignorable="d"
+             Height="300"
+             Width="450"
+             d:DesignHeight="350"
+             d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="个人中心"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Margin="10"></TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Image Source="{Binding UserAvatar}"
+                       Width="100"
+                       Height="100" />
+                <Button Content="更换头像"
+                        FontSize="15"
+
+                        Command="{Binding ChangeAvatarCommand}"
+                        Margin="10" />
+            </StackPanel>
+            <Grid Grid.Column="1">
+
+                <DockPanel Margin="0,0,10,0">
+
+                    <TextBlock Text="用户名 ："
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Top"
+                               Margin="2,20,2,2" />
+                    <TextBox md:HintAssist.Hint="UserName..."
+                             Text="{Binding UserDto.UserName}"
+                             DockPanel.Dock="Top"
+                             Margin="2"
+                             md:TextFieldAssist.HasClearButton="True" />
+                    <TextBlock Text="修改密码："
+                               DockPanel.Dock="Top"
+                               VerticalAlignment="Center"
+                               Margin="2,20,2,2" />
+                    <PasswordBox md:HintAssist.Hint="请输入密码..."
+                                 pass:PassWordExtensions.PasswordContent="{Binding Password,Mode=TwoWay}"
+                                 DockPanel.Dock="Top"
+                                 Margin="2"
+                                 md:TextFieldAssist.HasClearButton="True" />
+                    <PasswordBox md:HintAssist.Hint="请再次输入密码..."
+                                 pass:PassWordExtensions.PasswordContent="{Binding Passwords,Mode=TwoWay}"
+                                 DockPanel.Dock="Top"
+                                 Margin="2"
+                                 md:TextFieldAssist.HasClearButton="True" />
+                    <TextBlock DockPanel.Dock="Top"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Grid>
+        </Grid>
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="保存"
+                    Margin="10"
+                    Command="{Binding SaveCommand}" />
+            <Button Content="返回"
+                    Margin="10"
+                    Command="{Binding CancelCommand}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" />
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>
